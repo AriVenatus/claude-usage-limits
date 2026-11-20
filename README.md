@@ -1,6 +1,6 @@
 # claude-usage-limits
 
-A Claude Code mod that adds a **Usage** tab to the file-tree panel.
+A Claude Code mod that adds a **Usage** pane beside the chat. With the [claude-code-filetree](https://github.com/search?q=claude-code-filetree) plugin installed it shows up as a tab next to the Files tab.
 
 ![The Usage tab](assets/usage-tab.svg)
 
