@@ -1,6 +1,6 @@
 # claude-usage-limits
 
-A Claude Code mod that adds a **Usage** pane beside the chat. With the [claude-code-filetree](https://github.com/data-goblin/claude-code-filetree) plugin installed it shows up as a tab next to the Files tab.
+A Claude Code mod that adds a **Usage** pane beside the chat. It runs standalone; with the [claude-code-filetree](https://github.com/data-goblin/claude-code-filetree) plugin installed it shows up as a tab next to the Files tab.
 
 ![The Usage tab](assets/usage-tab.svg)
 
