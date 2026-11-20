@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="130" viewBox="0 0 400 130" font-family="monospace" font-size="15">
+<rect width="400" height="130" rx="8" fill="#262626"/>
+<text x="16" y="28" fill="#00b4d8" font-weight="bold">Cache keep-alive</text>
+<text x="16" y="52" fill="#e6e6e6">on: ping every 50 min</text>
+<text x="16" y="76" fill="#e6e6e6">Max idle pings (1-48): 4</text>
+<text x="16" y="108" fill="#8a8a8a">Stops after 4 idle pings (~3h) with a toast</text>
+</svg>

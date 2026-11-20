@@ -1,0 +1,10 @@
+{
+  "name": "usage-limits",
+  "version": "0.1.0",
+  "description": "Usage tab in the file-tree panel: context, cost, session time, 5h and weekly limits with pace, alerts and cache keep-alive",
+  "types": "./types/index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "AriVenatus"
+  }
+}

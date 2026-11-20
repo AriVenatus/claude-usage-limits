@@ -1,0 +1,12 @@
+{
+  "name": "claude-usage-limits",
+  "owner": {
+    "name": "AriVenatus"
+  },
+  "plugins": [
+    {
+      "name": "usage-limits",
+      "source": "./"
+    }
+  ]
+}
