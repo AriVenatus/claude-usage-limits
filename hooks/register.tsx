@@ -1,14 +1,15 @@
 import { atom, read, update } from 'claude-code'
 import type { Register } from 'claude-code'
 
-import type { Limit, Usage } from '../types'
+import type { Breakdown, Cat, Item, Limit, Usage } from '../types'
 
 const PANE = 'usage-limits'
 const usage = atom({ plugin: 'usage-limits', key: 'usage' } as const, { limits: [], ctxWindow: 0 } as Usage, {
-  shape: 'usage-3',
+  shape: 'usage-4',
 })
 const keepWarm = atom({ plugin: 'usage-limits', key: 'keepWarm' } as const, false)
 const maxPings = atom({ plugin: 'usage-limits', key: 'maxPings' } as const, 4)
+const open = atom({ plugin: 'usage-limits', key: 'open' } as const, '')
 const pings = atom({ plugin: 'usage-limits', key: 'pings' } as const, 0)
 const WINDOWS: Record<string, { name: string; ms: number }> = {
   five_hour: { name: 'Session (5h)', ms: 5 * 3600e3 },
@@ -42,8 +43,71 @@ const pace = (percent: number, resetsAt: string | undefined, windowMs: number) =
   }
 }
 
+const tok = (n: number) =>
+  n >= 1000 ? `${(n / 1000).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}K` : String(n)
+
+async function breakdown($: any): Promise<Breakdown | undefined> {
+  const b = (await $.session.usage({ breakdown: 'summary' })).context.breakdown
+  if (!b) return undefined
+  return {
+    cats: b.categories.map(({ name, tokens, color, kind }: Cat) => ({ name, tokens, color, kind })),
+    total: b.totalTokens,
+    max: b.rawMaxTokens,
+    mcp: b.mcpTools.map((t: any) => ({ name: t.name, sub: t.serverName, tokens: t.tokens })),
+    mem: b.memoryFiles.map((f: any) => ({ name: f.path.split('/').pop(), sub: f.type, tokens: f.tokens })),
+  }
+}
+
+// Rows like /context: used categories, then buffer and free space, then deferred
+// schemas (outside the window, so no percent), then collapsible MCP tools and memory files.
+function ctxView({ Box, Text, Button }: any, b: Breakdown, openKey: string, toggle: (k: string) => void) {
+  const w = Math.max(...b.cats.map(c => c.name.length)) + 5 // name column, then at least 5 spaces
+  const row = (key: string, color: string, name: string, tokens: number, right: string, dim = false) => (
+    <Text key={key} dimColor={dim}>
+      <Text color={color as any}>■ {name.padEnd(w)}</Text>
+      {tok(tokens).padStart(7)}  {right.padStart(8)}
+    </Text>
+  )
+  const pct = (n: number) => `${((n / b.max) * 100).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} %`
+  const by = (k: Cat['kind']) => b.cats.filter(c => c.kind === k)
+  const p = Math.round((b.total / b.max) * 100)
+  const list = (k: string, label: string, items: Item[]) => (
+    <Box flexDirection="column">
+      <Button key={k} label={`${openKey === k ? 'v' : '>'} ${label}  ${items.length}`} onPress={() => toggle(k)} />
+      {openKey === k &&
+        items.map(i => (
+          <Text key={i.sub + i.name} dimColor>
+            {i.name.slice(0, w + 2).padEnd(w + 2)}{tok(i.tokens).padStart(7)}
+          </Text>
+        ))}
+    </Box>
+  )
+  return (
+    <Box flexDirection="column">
+      <Text>
+        <Text color={color(p)}>{bar(p)}</Text> {p} % genutzt · {tok(b.total)} / {b.max.toLocaleString('de-DE')}
+      </Text>
+      <Box marginTop={1} flexDirection="column">
+        {by('used').map(c => row(c.name, c.color, c.name, c.tokens, pct(c.tokens)))}
+      </Box>
+      <Box marginTop={1} flexDirection="column">
+        {[...by('buffer'), ...by('free')].map(c => row(c.name, c.color, c.name, c.tokens, pct(c.tokens)))}
+      </Box>
+      <Box marginTop={1} flexDirection="column">
+        {by('deferred').map(c => row(c.name, c.color, c.name, c.tokens, '—', true))}
+      </Box>
+      <Box marginTop={1} flexDirection="column">
+        {list('mcp', 'MCP-Tools', b.mcp)}
+        {list('mem', 'Gedächtnisdateien', b.mem)}
+      </Box>
+    </Box>
+  )
+}
+
 async function refresh($: any, u: any) {
+  const bd = await breakdown($)
   await update($, usage, prev => ({
+    breakdown: bd ?? prev.breakdown,
     limits: u.rateLimits,
     ctxPercent: u.context.percent,
     ctxTokens: u.context.tokens,
@@ -133,13 +197,14 @@ export const register: Register = on => {
   on('ui.render', { component: 'Pane', requestId: PANE }, async ($, e) => {
     const { Box, Text, Button, Input } = $.ui.resolve(e)
     const u = await read($, usage)
+    const openKey = await read($, open)
     const isOn = await read($, keepWarm)
     const max = await read($, maxPings)
     const limits = u.limits.filter(l => WINDOWS[l.kind])
     return (
       <Box flexDirection="column">
         <Text bold color="cyan">Context</Text>
-        {u.ctxPercent === undefined ? (
+        {u.breakdown ? ctxView({ Box, Text, Button }, u.breakdown, openKey, k => update($, open, () => (openKey === k ? '' : k))) : u.ctxPercent === undefined ? (
           <Text dimColor>no reading yet</Text>
         ) : (
           <Text>
