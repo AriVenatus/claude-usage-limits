@@ -8,7 +8,9 @@ The images are mockups, not screenshots.
 
 ## Shows
 
-- Context fill, session time and estimated session cost
+- Context fill with a full breakdown like `/context`: used categories, autocompact buffer, free space and deferred tools, with tokens and percent of the window
+- Collapsible lists of MCP tools and memory files (click to expand)
+- Session time and estimated session cost
 - Session (5h) and weekly limits: percent used, time to reset, pace hint and projected hit time
 - Toasts at 80% and 90% of a limit, and when a window resets
 

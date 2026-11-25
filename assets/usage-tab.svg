@@ -1,19 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="360" height="430" viewBox="0 0 360 430" font-family="monospace" font-size="15">
-<rect width="360" height="430" rx="8" fill="#262626"/>
-<text x="16" y="28" fill="#00b4d8" font-weight="bold">Context</text>
-<rect x="16" y="38" width="120" height="14" fill="#3a3a3a"/><rect x="16" y="38" width="13" height="14" fill="#5fb88a"/><text x="148" y="50" fill="#e6e6e6">11% · 108k / 1000k</text>
-<text x="16" y="86" fill="#00b4d8" font-weight="bold">Session time</text>
-<text x="16" y="106" fill="#e6e6e6">1h 12m</text>
-<text x="16" y="142" fill="#00b4d8" font-weight="bold">Session cost</text>
-<text x="16" y="162" fill="#e6e6e6">$1.17 (estimate)</text>
-<text x="16" y="198" fill="#00b4d8" font-weight="bold">Session (5h)</text>
-<rect x="16" y="208" width="120" height="14" fill="#3a3a3a"/><rect x="16" y="208" width="37" height="14" fill="#5fb88a"/><text x="148" y="220" fill="#e6e6e6">31%</text>
-<text x="16" y="242" fill="#8a8a8a">resets in 0h 24m</text>
-<text x="16" y="262" fill="#e6e6e6">under pace</text>
-<text x="16" y="282" fill="#5fb88a">safe until reset</text>
-<text x="16" y="318" fill="#00b4d8" font-weight="bold">Weekly</text>
-<rect x="16" y="328" width="120" height="14" fill="#3a3a3a"/><rect x="16" y="328" width="7" height="14" fill="#5fb88a"/><text x="148" y="340" fill="#e6e6e6">6%</text>
-<text x="16" y="362" fill="#8a8a8a">resets in 4d 12h</text>
-<text x="16" y="382" fill="#e6e6e6">under pace</text>
-<text x="16" y="402" fill="#5fb88a">safe until reset</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="470" height="698" viewBox="0 0 470 698" font-family="monospace" font-size="15">
+<rect width="470" height="698" rx="8" fill="#262626"/>
+<text x="16" y="28" fill="#00b4d8" font-weight="bold" xml:space="preserve">Context</text>
+<rect x="16" y="38" width="120" height="14" fill="#3a3a3a"/><rect x="16" y="38" width="13" height="14" fill="#5fb88a"/>
+<text x="148" y="50" fill="#e6e6e6" xml:space="preserve">11 % genutzt · 108,0K / 1.000.000</text>
+<text y="82" font-size="15" xml:space="preserve"><tspan x="16" fill="#a78bfa">■ System prompt          </tspan><tspan fill="#e6e6e6">   6,2K     0,6 %</tspan></text>
+<text y="102" font-size="15" xml:space="preserve"><tspan x="16" fill="#60a5fa">■ System tools           </tspan><tspan fill="#e6e6e6">  14,8K     1,5 %</tspan></text>
+<text y="122" font-size="15" xml:space="preserve"><tspan x="16" fill="#f59e0b">■ MCP tools              </tspan><tspan fill="#e6e6e6">   9,1K     0,9 %</tspan></text>
+<text y="142" font-size="15" xml:space="preserve"><tspan x="16" fill="#34d399">■ Memory files           </tspan><tspan fill="#e6e6e6">   3,4K     0,3 %</tspan></text>
+<text y="162" font-size="15" xml:space="preserve"><tspan x="16" fill="#f472b6">■ Skills                 </tspan><tspan fill="#e6e6e6">   5,2K     0,5 %</tspan></text>
+<text y="182" font-size="15" xml:space="preserve"><tspan x="16" fill="#5fb88a">■ Messages               </tspan><tspan fill="#e6e6e6">  69,3K     6,9 %</tspan></text>
+<text y="214" font-size="15" xml:space="preserve"><tspan x="16" fill="#8a8a8a">■ Autocompact buffer     </tspan><tspan fill="#e6e6e6">  33,0K     3,3 %</tspan></text>
+<text y="234" font-size="15" xml:space="preserve"><tspan x="16" fill="#6b7280">■ Free space             </tspan><tspan fill="#e6e6e6"> 859,0K    85,9 %</tspan></text>
+<text y="266" font-size="15" xml:space="preserve"><tspan x="16" fill="#8a8a8a">■ Deferred tools         </tspan><tspan fill="#8a8a8a">  12,4K         —</tspan></text>
+<text x="16" y="298" fill="#e6e6e6" xml:space="preserve">&gt; MCP-Tools  14</text>
+<text x="16" y="318" fill="#e6e6e6" xml:space="preserve">&gt; Gedächtnisdateien  3</text>
+<text x="16" y="354" fill="#00b4d8" font-weight="bold" xml:space="preserve">Session time</text>
+<text x="16" y="374" fill="#e6e6e6" xml:space="preserve">1h 12m</text>
+<text x="16" y="410" fill="#00b4d8" font-weight="bold" xml:space="preserve">Session cost</text>
+<text x="16" y="430" fill="#e6e6e6" xml:space="preserve">$1.17 (estimate)</text>
+<text x="16" y="466" fill="#00b4d8" font-weight="bold" xml:space="preserve">Session (5h)</text>
+<rect x="16" y="476" width="120" height="14" fill="#3a3a3a"/><rect x="16" y="476" width="37" height="14" fill="#5fb88a"/>
+<text x="148" y="488" fill="#e6e6e6" xml:space="preserve">31%</text>
+<text x="16" y="510" fill="#8a8a8a" xml:space="preserve">resets in 0h 24m</text>
+<text x="16" y="530" fill="#e6e6e6" xml:space="preserve">under pace</text>
+<text x="16" y="550" fill="#5fb88a" xml:space="preserve">safe until reset</text>
+<text x="16" y="586" fill="#00b4d8" font-weight="bold" xml:space="preserve">Weekly</text>
+<rect x="16" y="596" width="120" height="14" fill="#3a3a3a"/><rect x="16" y="596" width="7" height="14" fill="#5fb88a"/>
+<text x="148" y="608" fill="#e6e6e6" xml:space="preserve">6%</text>
+<text x="16" y="630" fill="#8a8a8a" xml:space="preserve">resets in 4d 12h</text>
+<text x="16" y="650" fill="#e6e6e6" xml:space="preserve">under pace</text>
+<text x="16" y="670" fill="#5fb88a" xml:space="preserve">safe until reset</text>
 </svg>
