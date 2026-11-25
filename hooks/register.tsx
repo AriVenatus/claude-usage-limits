@@ -44,7 +44,7 @@ const pace = (percent: number, resetsAt: string | undefined, windowMs: number) =
 }
 
 const tok = (n: number) =>
-  n >= 1000 ? `${(n / 1000).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}K` : String(n)
+  n >= 1000 ? `${(n / 1000).toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}K` : String(n)
 
 async function breakdown($: any): Promise<Breakdown | undefined> {
   const b = (await $.session.usage({ breakdown: 'summary' })).context.breakdown
@@ -68,7 +68,7 @@ function ctxView({ Box, Text, Button }: any, b: Breakdown, openKey: string, togg
       {tok(tokens).padStart(7)}  {right.padStart(8)}
     </Text>
   )
-  const pct = (n: number) => `${((n / b.max) * 100).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} %`
+  const pct = (n: number) => `${((n / b.max) * 100).toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`
   const by = (k: Cat['kind']) => b.cats.filter(c => c.kind === k)
   const p = Math.round((b.total / b.max) * 100)
   const list = (k: string, label: string, items: Item[]) => (
@@ -85,7 +85,7 @@ function ctxView({ Box, Text, Button }: any, b: Breakdown, openKey: string, togg
   return (
     <Box flexDirection="column">
       <Text>
-        <Text color={color(p)}>{bar(p)}</Text> {p} % genutzt · {tok(b.total)} / {b.max.toLocaleString('de-DE')}
+        <Text color={color(p)}>{bar(p)}</Text> {p}% used · {tok(b.total)} / {b.max.toLocaleString('en-US')}
       </Text>
       <Box marginTop={1} flexDirection="column">
         {by('used').map(c => row(c.name, c.color, c.name, c.tokens, pct(c.tokens)))}
@@ -97,8 +97,8 @@ function ctxView({ Box, Text, Button }: any, b: Breakdown, openKey: string, togg
         {by('deferred').map(c => row(c.name, c.color, c.name, c.tokens, '—', true))}
       </Box>
       <Box marginTop={1} flexDirection="column">
-        {list('mcp', 'MCP-Tools', b.mcp)}
-        {list('mem', 'Gedächtnisdateien', b.mem)}
+        {list('mcp', 'MCP tools', b.mcp)}
+        {list('mem', 'Memory files', b.mem)}
       </Box>
     </Box>
   )
